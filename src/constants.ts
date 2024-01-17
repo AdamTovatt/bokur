@@ -19,3 +19,9 @@ export const Color =
     White: "#ede4da",
     PureWhite: "#eeeeee",
 };
+
+export const BorderRadius = 
+{
+    Default: "12px",
+    Small: "8px",
+}

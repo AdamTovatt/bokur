@@ -4,12 +4,7 @@
 	import PageContentContainer from '../components/PageContentContainer.svelte';
 	import TextContainer from '../components/TextContainer.svelte';
 	import VerticalSpacing from '../components/VerticalSpacing.svelte';
-
-	import { goto } from '$app/navigation';
-
-	function routeToPage(route: string, replaceState: boolean) {
-		goto(`/${route}`, { replaceState });
-	}
+	import { routeToPage } from '../functions/routing';
 </script>
 
 <PageContentContainer>
