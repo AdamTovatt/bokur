@@ -12,7 +12,7 @@
 		routeToPage('dashboard', false);
 	}
 	function login() {
-		auth.loginWithPop();
+		auth.login();
 	}
 </script>
 
