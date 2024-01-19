@@ -10,8 +10,17 @@
 	import { Color } from '../../constants';
 	import { routeToPage } from '../../functions/routing';
 	import type { PageData } from './$types';
+	import { token } from '$lib/store';
 
 	export let data: PageData;
+
+	const fetchData = () => {
+		fetch('http://176.71.116.3/bokur/Account/get-all', {
+			headers: {
+				Authorization: 'Bearer ' + $token
+			}
+		});
+	};
 </script>
 
 <PageContentContainer>
@@ -40,5 +49,6 @@
 				}}
 			/>
 		</Panel>
+		<button on:click={fetchData} class="btn btn-primary mt-4">Fetch data</button>
 	</MaxWidthContainer>
 </PageContentContainer>

@@ -4,7 +4,19 @@
 	import PageContentContainer from '../components/PageContentContainer.svelte';
 	import TextContainer from '../components/TextContainer.svelte';
 	import VerticalSpacing from '../components/VerticalSpacing.svelte';
+	import auth from '$lib/authService';
+	import { isAuthenticated } from '$lib/store';
 	import { routeToPage } from '../functions/routing';
+
+	$: if ($isAuthenticated) {
+		routeToPage('dashboard', false);
+	}
+	function login() {
+		auth.loginWithPop();
+	}
+	function logout() {
+		auth.logout();
+	}
 </script>
 
 <PageContentContainer>
@@ -14,7 +26,7 @@
 		<BokurButton
 			text="Login"
 			onClick={() => {
-				routeToPage('dashboard', false);
+				login();
 			}}
 		/>
 	</MaxWidthContainer>
