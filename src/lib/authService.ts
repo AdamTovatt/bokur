@@ -7,7 +7,10 @@ let client: Auth0Client | null = null;
 async function createClient(): Promise<Auth0Client> {
 	const auth0Client = await createAuth0Client({
 		domain: import.meta.env.VITE_AUTH0_DOMAIN as string,
-		clientId: import.meta.env.VITE_APP_CLIENT_ID as string
+		clientId: import.meta.env.VITE_APP_CLIENT_ID as string,
+		authorizationParams: {
+			audience: import.meta.env.VITE_AUTH0_AUDIENCE as string
+		}
 	});
 	return auth0Client;
 }
@@ -22,7 +25,13 @@ async function loginWithPop(options?: PopupLoginOptions): Promise<void> {
 		const userDetails = await client.getUser();
 		if (userDetails) {
 			user.set(userDetails);
-			token.set(await client.getTokenSilently());
+			token.set(
+				await client.getTokenSilently({
+					authorizationParams: {
+						audience: import.meta.env.VITE_AUTH0_AUDIENCE as string
+					}
+				})
+			);
 			isAuthenticated.set(true);
 		}
 	} catch (e) {

@@ -11,16 +11,21 @@
 	import { routeToPage } from '../../functions/routing';
 	import type { PageData } from './$types';
 	import { token } from '$lib/store';
+	import auth from '$lib/authService';
 
 	export let data: PageData;
 
 	const fetchData = () => {
-		fetch('http://176.71.116.3/bokur/Account/get-all', {
+		fetch('https://sakurapi.se/bokur/Account/get-all', {
 			headers: {
 				Authorization: 'Bearer ' + $token
 			}
 		});
 	};
+	function logout() {
+		auth.logout();
+	}
+	console.log($token);
 </script>
 
 <PageContentContainer>
@@ -50,5 +55,6 @@
 			/>
 		</Panel>
 		<button on:click={fetchData} class="btn btn-primary mt-4">Fetch data</button>
+		<button on:click={logout} class="btn btn-primary mt-4">logout</button>
 	</MaxWidthContainer>
 </PageContentContainer>

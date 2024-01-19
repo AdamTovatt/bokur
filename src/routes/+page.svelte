@@ -14,9 +14,6 @@
 	function login() {
 		auth.loginWithPop();
 	}
-	function logout() {
-		auth.logout();
-	}
 </script>
 
 <PageContentContainer>

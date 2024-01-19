@@ -8,7 +8,13 @@
 		$auth0Client = await auth.createClient();
 		isAuthenticated.set(await $auth0Client.isAuthenticated());
 		user.set(await $auth0Client.getUser());
-		token.set(await $auth0Client.getTokenSilently());
+		token.set(
+			await $auth0Client.getTokenSilently({
+				authorizationParams: {
+					audience: import.meta.env.VITE_AUTH0_AUDIENCE
+				}
+			})
+		);
 	});
 </script>
 
