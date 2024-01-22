@@ -21,7 +21,7 @@ async function login(): Promise<void> {
 	}
 	popupOpen.set(true);
 	try {
-		await client.loginWithRedirect({
+		await client.loginWithPopup({
 			authorizationParams: {
 				redirect_uri: window.location.origin
 			}

@@ -12,20 +12,25 @@
 	import type { PageData } from './$types';
 	import { token } from '$lib/store';
 	import auth from '$lib/authService';
+	import { getAllAccounts, getRequisitionDaysLeft } from '$lib/api';
 
 	export let data: PageData;
 
-	const fetchData = () => {
-		fetch('https://sakurapi.se/bokur/Account/get-all', {
-			headers: {
-				Authorization: 'Bearer ' + $token
-			}
-		});
-	};
 	function logout() {
 		auth.logout();
 	}
 	console.log($token);
+
+	let requisitionDaysLeft: number;
+
+	async function runAsyncStartupFunctions() {
+		requisitionDaysLeft = await getRequisitionDaysLeft();
+		getAllAccounts();
+	}
+
+	$: {
+		runAsyncStartupFunctions();
+	}
 </script>
 
 <PageContentContainer>
@@ -44,7 +49,9 @@
 		<VerticalSpacing height={1} />
 		<Panel backgroundColor={Color.Depth2} center={true} flexDirection="row">
 			<VerticalSpacing height={1.5} />
-			<TextContainer>34 days left on requisition</TextContainer>
+			<TextContainer
+				>{requisitionDaysLeft ? requisitionDaysLeft : '(loading)'} days left on requisition</TextContainer
+			>
 			<HorizontalSpacing width={1.5} />
 			<BokurButton
 				backgroundColor={Color.Depth3}
@@ -54,7 +61,6 @@
 				}}
 			/>
 		</Panel>
-		<button on:click={fetchData} class="btn btn-primary mt-4">Fetch data</button>
 		<button on:click={logout} class="btn btn-primary mt-4">logout</button>
 	</MaxWidthContainer>
 </PageContentContainer>
