@@ -6,7 +6,7 @@
 	import TextContainer from '../../components/TextContainer.svelte';
 	import VerticalSpacing from '../../components/VerticalSpacing.svelte';
 	import HorizontalSpacing from '../../components/HorizontalSpacing.svelte';
-	import TwoColumnsRow from '../../components/TwoColumnsRow.svelte';
+	import AccountsSummaryPanel from '../../components/AccountsSummaryPanel.svelte';
 	import { Color } from '../../constants';
 	import { routeToPage } from '../../functions/routing';
 	import type { PageData } from './$types';
@@ -35,17 +35,7 @@
 
 <PageContentContainer>
 	<MaxWidthContainer maxWidth={25}>
-		<Panel backgroundColor={Color.Depth3} center={true}>
-			<VerticalSpacing height={1} />
-			<TextContainer>Accounts</TextContainer>
-			<VerticalSpacing height={1.5} />
-			<TwoColumnsRow leftColumn={'Oliver'} rightColumn={'20 kr'}></TwoColumnsRow>
-			<TwoColumnsRow leftColumn={'Adam'} rightColumn={'12 kr'}></TwoColumnsRow>
-			<TwoColumnsRow leftColumn={'Shared'} rightColumn={'79 900 kr'}></TwoColumnsRow>
-			<VerticalSpacing height={1} />
-			<TwoColumnsRow leftColumn={'Total'} rightColumn={'79 932 kr'}></TwoColumnsRow>
-			<VerticalSpacing height={0.5} />
-		</Panel>
+		<AccountsSummaryPanel />
 		<VerticalSpacing height={1} />
 		<Panel backgroundColor={Color.Depth2} center={true} flexDirection="row">
 			<VerticalSpacing height={1.5} />
