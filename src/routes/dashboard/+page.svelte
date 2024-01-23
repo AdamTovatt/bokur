@@ -13,6 +13,7 @@
 	import { token } from '$lib/store';
 	import auth from '$lib/authService';
 	import { getAllAccounts, getRequisitionDaysLeft } from '$lib/api';
+	import Taskbar from '../../components/Taskbar.svelte';
 
 	export let data: PageData;
 
@@ -33,6 +34,7 @@
 	}
 </script>
 
+<Taskbar />
 <PageContentContainer>
 	<MaxWidthContainer maxWidth={25}>
 		<AccountsSummaryPanel />

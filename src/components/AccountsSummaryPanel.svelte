@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { getAccountSummaries } from '$lib/api';
 	import type { AccountValueInformation } from '$lib/apiModels';
 	import { Color } from '../constants';
 	import Panel from './Panel.svelte';
@@ -8,6 +9,14 @@
 
 	// Explicitly specify the type of accountsInformation
 	export let accountsInformation: AccountValueInformation[] | null = null;
+
+	async function runAsyncStartupFunctions() {
+		accountsInformation = await getAccountSummaries();
+	}
+
+	$: {
+		runAsyncStartupFunctions();
+	}
 </script>
 
 <Panel backgroundColor={Color.Depth3} center={true}>
