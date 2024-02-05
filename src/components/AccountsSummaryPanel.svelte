@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getAccountSummaries } from '$lib/api';
-	import type { AccountValueInformation } from '$lib/apiModels';
+	import type { AccountValueInformation } from '$lib/types';
 	import { Color } from '../constants';
 	import Panel from './Panel.svelte';
 	import TextContainer from './TextContainer.svelte';

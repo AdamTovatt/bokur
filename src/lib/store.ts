@@ -9,3 +9,5 @@ export const popupOpen = writable(false);
 export const error = writable('');
 export const loging = writable(false);
 export const auth0Client = writable({} as Auth0Client);
+
+export const pageTitle = writable('');

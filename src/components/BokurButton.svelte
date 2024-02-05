@@ -1,22 +1,24 @@
 <script lang="ts">
 	import { Color } from '../constants';
 
-	export let text: string = 'Click me';
 	export let onClick: () => void;
 	export let backgroundColor: string = Color.Depth3;
 	export let color: string = Color.White;
 	export let fontSize: number = 1;
+	export let hasBorder = false;
 </script>
 
 <button
 	on:click={onClick}
-	style="background-color: {backgroundColor}; color: {color}; font-size: {fontSize}rem;"
-	>{text}</button
+	style="background-color: {backgroundColor}; color: {color}; font-size: {fontSize}rem; border: {hasBorder
+		? '1px solid ' + Color.Success
+		: 'none'};"
 >
+	<slot />
+</button>
 
 <style>
 	button {
-		flex: 1;
 		width: 100%;
 		padding-top: 1rem;
 		padding-bottom: 1rem;

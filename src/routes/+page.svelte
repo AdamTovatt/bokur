@@ -7,6 +7,7 @@
 	import auth from '$lib/authService';
 	import { isAuthenticated } from '$lib/store';
 	import { routeToPage } from '../functions/routing';
+	import { Color } from '../constants';
 
 	$: if ($isAuthenticated) {
 		routeToPage('dashboard', false);
@@ -16,15 +17,11 @@
 	}
 </script>
 
-<PageContentContainer>
-	<MaxWidthContainer maxWidth={20}>
-		<TextContainer>You have to be logged in to view this page</TextContainer>
-		<VerticalSpacing height={1.5} />
-		<BokurButton
-			text="Login"
-			onClick={() => {
-				login();
-			}}
-		/>
-	</MaxWidthContainer>
-</PageContentContainer>
+<TextContainer>You have to be logged in to view this page</TextContainer>
+<VerticalSpacing height={1.5} />
+<BokurButton
+	onClick={() => {
+		login();
+	}}
+	backgroundColor={Color.Depth4}>Login</BokurButton
+>

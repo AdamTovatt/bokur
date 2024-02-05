@@ -10,8 +10,6 @@
 	});
 </script>
 
-<div>
-	{#if $isAuthenticated}
-		<slot />
-	{/if}
-</div>
+{#if $isAuthenticated}
+	<slot />
+{/if}
