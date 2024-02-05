@@ -105,3 +105,25 @@ export async function getAllThatRequiresAction(): Promise<Transaction[]> {
 		throw error;
 	}
 }
+
+export async function getAllTransactions(): Promise<Transaction[]> {
+	try {
+		const response = await fetch(apiUrl + 'transaction/get-all', {
+			headers: {
+				Authorization: 'Bearer ' + localToken
+			}
+		});
+
+		if (!response.ok) {
+			throw new Error(`Failed to fetch get all transactions. Status: ${response.status}`);
+		}
+
+		const transactions: Transaction[] = await response.json();
+
+		return transactions;
+	} catch (error) {
+		// Handle errors, log them, or rethrow if necessary
+		console.error('Error fetching get all transactions:', error);
+		throw error;
+	}
+}

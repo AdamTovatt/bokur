@@ -9,6 +9,7 @@
 	import Taskbar from '../components/Taskbar.svelte';
 	import PageContentContainer from '../components/PageContentContainer.svelte';
 	import MaxWidthContainer from '../components/MaxWidthContainer.svelte';
+	import Login from '../components/Login.svelte';
 	onMount(async () => {
 		$auth0Client = await auth.createClient();
 		isAuthenticated.set(await $auth0Client.isAuthenticated());
@@ -28,6 +29,10 @@
 <Taskbar />
 <PageContentContainer>
 	<MaxWidthContainer maxWidth={30}>
-		<slot />
+		{#if $isAuthenticated}
+			<slot />
+		{:else}
+			<Login />
+		{/if}
 	</MaxWidthContainer>
 </PageContentContainer>

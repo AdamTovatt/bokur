@@ -1,27 +1,36 @@
 <script lang="ts">
-	import BokurButton from '../components/BokurButton.svelte';
-	import MaxWidthContainer from '../components/MaxWidthContainer.svelte';
-	import PageContentContainer from '../components/PageContentContainer.svelte';
-	import TextContainer from '../components/TextContainer.svelte';
 	import VerticalSpacing from '../components/VerticalSpacing.svelte';
+	import AccountsSummaryPanel from '../components/AccountsSummaryPanel.svelte';
+	import { pageTitle, token } from '$lib/store';
 	import auth from '$lib/authService';
-	import { isAuthenticated } from '$lib/store';
-	import { routeToPage } from '../functions/routing';
-	import { Color } from '../constants';
+	import { getAllAccounts, getRequisitionDaysLeft } from '$lib/api';
+	import { onMount } from 'svelte';
+	import Requisition from '../components/Requisition.svelte';
+	import ActionRequired from '../components/ActionRequired.svelte';
+	import BokurButton from '../components/BokurButton.svelte';
 
-	$: if ($isAuthenticated) {
-		routeToPage('dashboard', false);
+	function logout() {
+		auth.logout();
 	}
-	function login() {
-		auth.login();
+
+	async function initialize() {
+		getAllAccounts();
 	}
+
+	$: {
+		if ($token) {
+			initialize();
+		}
+	}
+
+	onMount(() => {
+		pageTitle.set('Dashboard');
+	});
 </script>
 
-<TextContainer>You have to be logged in to view this page</TextContainer>
-<VerticalSpacing height={1.5} />
-<BokurButton
-	onClick={() => {
-		login();
-	}}
-	backgroundColor={Color.Depth4}>Login</BokurButton
->
+<AccountsSummaryPanel />
+<VerticalSpacing height={1} />
+<Requisition />
+<ActionRequired />
+<div class="h-4" />
+<BokurButton onClick={logout}>Logout</BokurButton>

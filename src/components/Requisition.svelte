@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { getRequisitionDaysLeft } from '$lib/api';
+	import { token } from '$lib/store';
 	import { Color } from '../constants';
 	import { routeToPage } from '../functions/routing';
 	import BokurButton from './BokurButton.svelte';
@@ -16,7 +17,9 @@
 	}
 
 	$: {
-		initialize();
+		if ($token) {
+			initialize();
+		}
 	}
 </script>
 

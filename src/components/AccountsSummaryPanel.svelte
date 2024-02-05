@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { getAccountSummaries } from '$lib/api';
+	import { token } from '$lib/store';
 	import type { AccountValueInformation } from '$lib/types';
 	import { Color } from '../constants';
 	import Panel from './Panel.svelte';
@@ -15,7 +16,9 @@
 	}
 
 	$: {
-		runAsyncStartupFunctions();
+		if ($token) {
+			runAsyncStartupFunctions();
+		}
 	}
 </script>
 
