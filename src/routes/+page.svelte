@@ -28,9 +28,13 @@
 	});
 </script>
 
+<VerticalSpacing height={1} />
 <AccountsSummaryPanel />
 <VerticalSpacing height={1} />
 <Requisition />
+<VerticalSpacing height={1} />
 <ActionRequired />
+<VerticalSpacing height={1} />
 <div class="h-4" />
 <BokurButton onClick={logout}>Logout</BokurButton>
+<VerticalSpacing height={5} />

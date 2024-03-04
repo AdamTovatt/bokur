@@ -5,6 +5,7 @@
 	import Transaction from '../../components/Transaction.svelte';
 	import { Color } from '../../constants';
 	import TransactionsContainer from '../../components/TransactionsContainer.svelte';
+	import VerticalSpacing from '../../components/VerticalSpacing.svelte';
 
 	let transactions: import('$lib/types').Transaction[] = [];
 	let transactionsWithAction: import('$lib/types').Transaction[] = [];
@@ -24,7 +25,8 @@
 	}
 </script>
 
-<div class="flex flex-col gap-8" style="max-height: 100vh;">
+<VerticalSpacing height={1} />
+<div class="flex flex-col gap-4" style="max-height: 100vh;">
 	<TransactionsContainer title="All transactions" expanded={transactionsWithAction.length === 0}>
 		{#each transactions as transaction (transaction.id)}
 			<Transaction {transaction} />

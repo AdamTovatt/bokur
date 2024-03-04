@@ -7,11 +7,11 @@
 </script>
 
 <div
-	class="flex flex-row p-4 rounded-2xl items-center relative"
-	style={`background-color: ${Color.Depth4};`}
+	class="flex flex-row p-3 rounded-2xl items-center relative"
+	style={`background-color: ${Color.Depth4}; font-size: 0.8rem;`}
 >
-	<div class="flex flex-col" style="width: 90%;">
-		<div class="flex flex-row justify-between mb-4">
+	<div class="flex flex-col" style="width: 98%;">
+		<div class="flex flex-row justify-between mb-1">
 			<p style="max-width: 60%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
 				{transaction.name}
 			</p>

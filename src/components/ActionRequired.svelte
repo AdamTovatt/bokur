@@ -21,10 +21,10 @@
 {#if transactions.length > 0}
 	<div
 		style={`background-color: ${Color.Depth3};`}
-		class="flex flex-col rounded-lg items-center p-8 mt-auto"
+		class="flex flex-col rounded-lg items-center p-6 mt-auto"
 	>
 		<p class="text-xl text-white font-light">Action required!</p>
-		<p class="text-white text-md font-light mt-8 mb-8">
+		<p class="text-white text-md font-light mt-4 mb-4">
 			{transactions.length} transactions are missing data
 		</p>
 		<BokurButton
