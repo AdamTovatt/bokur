@@ -3,8 +3,12 @@
 	import { Color } from '../constants';
 	import { routeToPage } from '../functions/routing';
 	import Plupp from './Plupp.svelte';
+	import VerticalSpacing from './VerticalSpacing.svelte';
 
 	export let transaction: Transaction;
+	export let onIgnoredUpdated: (transaction: Transaction, ignored: boolean) => void;
+
+	let isChecked = false; // Assuming you want the checkbox initially unchecked
 </script>
 
 <div
@@ -35,7 +39,20 @@
 			</p>
 			<p>{transaction.value} kr</p>
 		</div>
-		<div class="flex flex-row justify-end mb-1">
+		<VerticalSpacing height={0.5} />
+		<div class="flex flex-row justify-between mb-1">
+			<p>
+				Ignored:
+				<span
+					><input
+						type="checkbox"
+						bind:checked={transaction.ignored}
+						on:change={() => {
+							onIgnoredUpdated(transaction, transaction.ignored);
+						}}
+					/></span
+				>
+			</p>
 			<p>{new Date(transaction.date).toLocaleDateString('sv-SE')}</p>
 		</div>
 	</div>

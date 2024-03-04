@@ -149,3 +149,26 @@ export async function getTransaction(id: string): Promise<Transaction> {
 		throw error;
 	}
 }
+
+export async function updateTransaction(transaction: Transaction): Promise<void> {
+	try {
+		const response = await fetch(apiUrl + 'transaction/update', {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: 'Bearer ' + localToken
+			},
+			body: JSON.stringify(transaction)
+		});
+
+		if (!response.ok) {
+			throw new Error(`Failed to update transaction. Status: ${response.status}`);
+		}
+
+		// Optionally handle response data if necessary
+	} catch (error) {
+		// Handle errors, log them, or rethrow if necessary
+		console.error('Error updating transaction:', error);
+		throw error;
+	}
+}

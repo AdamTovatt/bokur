@@ -2,7 +2,7 @@
 	import Transaction from '../../components/Transaction.svelte';
 	import VerticalSpacing from '../../components/VerticalSpacing.svelte';
 	import { Color } from '../../constants';
-	import { getTransaction } from '$lib/api';
+	import { getTransaction, updateTransaction } from '$lib/api';
 	import { page } from '$app/stores';
 	import { pageTitle, token } from '$lib/store';
 	import { onMount } from 'svelte';
@@ -34,7 +34,13 @@
 <div style="max-width: 100vw">
 	<HorizontalSpacing width={1} />
 	{#if transaction}
-		<TransactionPageHeader {transaction} />
+		<TransactionPageHeader
+			{transaction}
+			onIgnoredUpdated={async (transaction, newValue) => {
+				transaction.ignored = newValue;
+				await updateTransaction(transaction);
+			}}
+		/>
 	{/if}
 </div>
 <div style="width: 100%; display: flex; flex: 1; flex-direction: column; justify-content: flex-end">
