@@ -18,13 +18,13 @@
 			routeToPage('transaction?id=' + transaction.id);
 		}}
 	>
-		<div class="flex flex-row justify-between mb-1">
+		<div style="display: flex; justify-content: space-between;">
 			<p style="max-width: 60%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
 				{transaction.name}
 			</p>
 			<p>{transaction.value} kr</p>
 		</div>
-		<div class="flex flex-row justify-between">
+		<div style="display: flex; justify-content: space-between;">
 			<p>
 				{#if transaction.affectedAccount}
 					{transaction.affectedAccount}
