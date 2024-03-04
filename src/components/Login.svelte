@@ -10,6 +10,7 @@
 	}
 </script>
 
+<VerticalSpacing height={1} />
 <TextContainer>You have to be logged in to view this page</TextContainer>
 <VerticalSpacing height={1.5} />
 <BokurButton

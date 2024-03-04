@@ -17,7 +17,7 @@
 	>
 		<svelte:component this={Icon} />
 	</button>
-	<span class="text-white">{$pageTitle}</span>
+	<span class="text-white" style="color: ${Color.White};">{$pageTitle}</span>
 	<HamburgerIcon />
 </div>
 

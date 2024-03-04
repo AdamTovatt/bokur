@@ -6,13 +6,15 @@
 	export let color: string = Color.White;
 	export let fontSize: number = 1;
 	export let hasBorder = false;
+	export let additionalStyling: string | null = null;
+	export let padding: number = 1;
 </script>
 
 <button
 	on:click={onClick}
 	style="background-color: {backgroundColor}; color: {color}; font-size: {fontSize}rem; border: {hasBorder
 		? '1px solid ' + Color.Success
-		: 'none'};"
+		: 'none'}; padding-top: {padding}rem; padding-bottom: {padding}rem; {additionalStyling ?? ''}"
 >
 	<slot />
 </button>
@@ -20,8 +22,6 @@
 <style>
 	button {
 		width: 100%;
-		padding-top: 1rem;
-		padding-bottom: 1rem;
 		border: none;
 		border-radius: 12px;
 		cursor: pointer;
