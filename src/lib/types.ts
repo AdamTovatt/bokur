@@ -16,6 +16,7 @@ export interface Transaction {
 	date: Date;
 	associatedFileName: string | null;
 	affectedAccount: AffectedAccount;
+	ignoreFileRequirement: boolean;
 	ignored: boolean;
 	parentId: number;
 	hasChildren: boolean;
