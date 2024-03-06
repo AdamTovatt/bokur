@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getAllThatRequiresAction, getAllTransactions } from '$lib/api';
+	import { getAllAccounts, getAllThatRequiresAction, getAllTransactions } from '$lib/api';
 	import { pageTitle, token } from '$lib/store';
 	import { onMount } from 'svelte';
 	import Transaction from '../../components/Transaction.svelte';
@@ -9,6 +9,7 @@
 
 	let transactions: import('$lib/types').Transaction[] = [];
 	let transactionsWithAction: import('$lib/types').Transaction[] = [];
+
 	onMount(() => {
 		pageTitle.set('Transactions');
 	});

@@ -8,13 +8,15 @@
 	export let hasBorder = false;
 	export let additionalStyling: string | null = null;
 	export let padding: number = 1;
+	export let marginBottom: number = 0;
 </script>
 
 <button
 	on:click={onClick}
 	style="background-color: {backgroundColor}; color: {color}; font-size: {fontSize}rem; border: {hasBorder
 		? '1px solid ' + Color.Success
-		: 'none'}; padding-top: {padding}rem; padding-bottom: {padding}rem; {additionalStyling ?? ''}"
+		: 'none'}; padding-top: {padding}rem; padding-bottom: {padding}rem; margin-bottom: {marginBottom}rem; {additionalStyling ??
+		''}"
 >
 	<slot />
 </button>

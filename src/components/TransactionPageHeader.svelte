@@ -1,14 +1,11 @@
 <script lang="ts">
 	import type { Transaction } from '$lib/types';
 	import { Color } from '../constants';
-	import { routeToPage } from '../functions/routing';
 	import Plupp from './Plupp.svelte';
 	import VerticalSpacing from './VerticalSpacing.svelte';
 
 	export let transaction: Transaction;
 	export let onIgnoredUpdated: (transaction: Transaction, ignored: boolean) => void;
-
-	let isChecked = false; // Assuming you want the checkbox initially unchecked
 </script>
 
 <div
@@ -32,7 +29,7 @@
 		<div class="flex flex-row justify-between">
 			<p>
 				{#if transaction.affectedAccount}
-					{transaction.affectedAccount}
+					{transaction.affectedAccount.name}
 				{:else}
 					(missing account)
 				{/if}
