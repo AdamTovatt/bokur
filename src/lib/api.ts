@@ -106,9 +106,9 @@ export async function getAllThatRequiresAction(): Promise<Transaction[]> {
 	}
 }
 
-export async function getAllTransactions(): Promise<Transaction[]> {
+export async function getAllTransactions(pageSize: number, pageNumber: number): Promise<Transaction[]> {
 	try {
-		const response = await fetch(apiUrl + 'transaction/get-all', {
+		const response = await fetch(apiUrl + 'transaction/get-all?pageSize=' + pageSize + "&pageNumber=" + pageNumber, {
 			headers: {
 				Authorization: 'Bearer ' + localToken
 			}
@@ -171,4 +171,82 @@ export async function updateTransaction(transaction: Transaction): Promise<void>
 		console.error('Error updating transaction:', error);
 		throw error;
 	}
+}
+
+export async function uploadFile(file: File, transactionId: number): Promise<void> {
+    try {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        const response = await fetch(apiUrl + `transaction/${transactionId}/file/upload`, {
+            method: 'PUT',
+            headers: {
+                Authorization: 'Bearer ' + localToken
+            },
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to upload file. Status: ${response.status}`);
+        }
+
+        // Optionally handle response data if necessary
+    } catch (error) {
+        // Handle errors, log them, or rethrow if necessary
+        console.error('Error uploading file:', error);
+        throw error;
+    }
+}
+
+export async function downloadTransactionFile(transactionId: number, fileName: string): Promise<void> {
+    try {
+        const response = await fetch(apiUrl + `transaction/${transactionId}/file/download`, {
+            method: 'GET',
+            headers: {
+                Authorization: 'Bearer ' + localToken
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to download transaction file. Status: ${response.status}`);
+        }
+
+        const blob = await response.blob();
+
+        // Create a temporary link element to trigger the download
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+        // Optionally handle response data if necessary
+    } catch (error) {
+        // Handle errors, log them, or rethrow if necessary
+        console.error('Error downloading transaction file:', error);
+        throw error;
+    }
+}
+
+export async function deleteTransactionFile(transactionId: number): Promise<void> {
+    try {
+        const response = await fetch(apiUrl + `transaction/${transactionId}/file/delete`, {
+            method: 'DELETE',
+            headers: {
+                Authorization: 'Bearer ' + localToken
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to delete transaction file. Status: ${response.status}`);
+        }
+
+        // Optionally handle response data if necessary
+    } catch (error) {
+        // Handle errors, log them, or rethrow if necessary
+        console.error('Error deleting transaction file:', error);
+        throw error;
+    }
 }

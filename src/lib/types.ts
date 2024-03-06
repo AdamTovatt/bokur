@@ -14,7 +14,7 @@ export interface Transaction {
 	name: string;
 	value: number;
 	date: Date;
-	associatedFileName: string;
+	associatedFileName: string | null;
 	affectedAccount: AffectedAccount;
 	ignored: boolean;
 	parentId: number;

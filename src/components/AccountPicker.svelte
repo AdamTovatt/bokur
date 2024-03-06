@@ -2,7 +2,6 @@
 	import type { Account } from '$lib/types';
 	import { BorderRadius, Color } from '../constants';
 	import BokurButton from './BokurButton.svelte';
-	import VerticalSpacing from './VerticalSpacing.svelte';
 	export let accounts: Account[]; // Input property for available accounts
 	export let onClick: (account: Account) => void;
 </script>

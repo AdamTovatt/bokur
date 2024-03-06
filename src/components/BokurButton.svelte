@@ -9,14 +9,17 @@
 	export let additionalStyling: string | null = null;
 	export let padding: number = 1;
 	export let marginBottom: number = 0;
+	export let maxWidth: number | null = null;
+	export let borderColor: string = Color.Success;
 </script>
 
 <button
 	on:click={onClick}
 	style="background-color: {backgroundColor}; color: {color}; font-size: {fontSize}rem; border: {hasBorder
-		? '1px solid ' + Color.Success
-		: 'none'}; padding-top: {padding}rem; padding-bottom: {padding}rem; margin-bottom: {marginBottom}rem; {additionalStyling ??
-		''}"
+		? '1px solid ' + borderColor
+		: 'none'}; padding-top: {padding}rem; padding-bottom: {padding}rem; margin-bottom: {marginBottom}rem; {maxWidth
+		? 'max-width: ' + maxWidth + 'rem'
+		: ''}{additionalStyling ?? ''}"
 >
 	<slot />
 </button>

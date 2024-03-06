@@ -2,7 +2,14 @@
 	import Transaction from '../../components/Transaction.svelte';
 	import VerticalSpacing from '../../components/VerticalSpacing.svelte';
 	import { Color } from '../../constants';
-	import { getAllAccounts, getTransaction, updateTransaction } from '$lib/api';
+	import {
+		deleteTransactionFile,
+		downloadTransactionFile,
+		getAllAccounts,
+		getTransaction,
+		updateTransaction,
+		uploadFile
+	} from '$lib/api';
 	import { page } from '$app/stores';
 	import { pageTitle, token } from '$lib/store';
 	import { onMount } from 'svelte';
@@ -13,6 +20,8 @@
 	import TransactionDetail from '../../components/TransactionDetail.svelte';
 	import type { Account } from '$lib/types';
 	import AccountPicker from '../../components/AccountPicker.svelte';
+	import FilePicker from '../../components/FilePicker.svelte';
+	import { assets } from '$app/paths';
 
 	onMount(() => {
 		pageTitle.set('Transaction');
@@ -23,6 +32,7 @@
 	let accounts: Account[];
 
 	let isPickingAccount: boolean = false;
+	let isUploadingFile: boolean = false;
 
 	async function initialize() {
 		transaction = await getTransaction(transactionId!);
@@ -40,15 +50,38 @@
 		isPickingAccount = false;
 		await updateTransaction(transaction);
 	}
+
+	async function fileWasChosen(file: File, fileName: string) {
+		transaction.associatedFileName = fileName;
+		isUploadingFile = false;
+		await uploadFile(file, transaction.id);
+		await getTransaction(transactionId!);
+	}
+
+	async function deleteFile() {
+		await deleteTransactionFile(transaction.id);
+		transaction.associatedFileName = null;
+	}
 </script>
 
 <VerticalSpacing height={1} />
-{#if isPickingAccount}
-	<div style="width: 100%; display: flex; flex-direction: row; justify-content:center; flex: 1;">
+{#if isPickingAccount || isUploadingFile}
+	<button
+		style="width: 100%; display: flex; flex-direction: row; justify-content:center; flex: 1; cursor: default;"
+		on:click={() => {
+			isUploadingFile = false;
+			isPickingAccount = false;
+		}}
+	>
 		<div style="display: flex; flex-direction: column; justify-content: center;">
-			<AccountPicker {accounts} onClick={accountWasChosen} />
+			{#if isPickingAccount}
+				<AccountPicker {accounts} onClick={accountWasChosen} />
+			{/if}
+			{#if isUploadingFile}
+				<FilePicker onFilePicked={fileWasChosen} />
+			{/if}
 		</div>
-	</div>
+	</button>
 {:else}
 	<div style="max-width: 100vw">
 		<HorizontalSpacing width={1} />
@@ -87,10 +120,15 @@
 					/>
 					<VerticalSpacing height={1} />
 					<TransactionDetail
+						onWantsToDelete={deleteFile}
+						showDeleteButton={transaction.associatedFileName !== null}
 						hasBorder={transaction.associatedFileName === null}
 						label={'File: ' + (transaction.associatedFileName ?? '(no file)')}
 						buttonText={transaction.associatedFileName === null ? 'Add file' : 'Download file'}
-						onClick={() => {}}
+						onClick={async () => {
+							if (transaction.associatedFileName === null) isUploadingFile = true;
+							else await downloadTransactionFile(transaction.id, transaction.associatedFileName);
+						}}
 					/>
 				</div>
 			{:else}
