@@ -11,8 +11,11 @@
 	// Explicitly specify the type of accountsInformation
 	export let accountsInformation: AccountValueInformation[] | null = null;
 
+	let totalValue: number = 0;
+
 	async function runAsyncStartupFunctions() {
 		accountsInformation = await getAccountSummaries();
+		totalValue = accountsInformation.reduce((acc, summary) => acc + summary.balance, 0);
 	}
 
 	$: {
@@ -31,10 +34,10 @@
 			<TwoColumnsRow leftColumn={summary.account.name} rightColumn={summary.balance.toString()}
 			></TwoColumnsRow>
 		{/each}
+		<VerticalSpacing height={1} />
+		<TwoColumnsRow leftColumn={'Total'} rightColumn={totalValue}></TwoColumnsRow>
+		<VerticalSpacing height={0.5} />
 	{:else}
 		<TextContainer>(loading)</TextContainer>
 	{/if}
-	<VerticalSpacing height={1} />
-	<TwoColumnsRow leftColumn={'Total'} rightColumn={'79 932 kr'}></TwoColumnsRow>
-	<VerticalSpacing height={0.5} />
 </Panel>
