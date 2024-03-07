@@ -88,8 +88,7 @@
 		{#if transaction}
 			<TransactionPageHeader
 				{transaction}
-				onIgnoredUpdated={async (transaction, newValue) => {
-					transaction.ignored = newValue;
+				onIgnoredUpdated={async (transaction) => {
 					await updateTransaction(transaction);
 				}}
 			/>
