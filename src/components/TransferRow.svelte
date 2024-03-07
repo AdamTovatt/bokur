@@ -33,7 +33,7 @@
 			<button
 				style="background-color: {Color.Depth5}; padding-top: 0.5rem; padding-bottom: 0.5rem;"
 				on:click={() => {
-					routeToPage('transaction?id=' + transaction.id);
+					routeToPage('transfer?id=' + transaction.id);
 				}}
 			>
 				<CogIcon />
