@@ -55,12 +55,14 @@
 >
 	{#if !isCreatingTransfer}
 		<div style="display: flex; flex-direction: column;">
-			{#each transaction.children as transfer}
-				{#if transfer.value > 0}
-					<TransferRow transaction={transfer} siblingTransaction={getSibling(transfer)} />
-				{/if}
-			{/each}
-			<VerticalSpacing height={0.5} />
+			{#if transaction.children && transaction.children.length > 0}
+				{#each transaction.children as transfer}
+					{#if transfer.value > 0}
+						<TransferRow transaction={transfer} siblingTransaction={getSibling(transfer)} />
+					{/if}
+				{/each}
+				<VerticalSpacing height={0.5} />
+			{/if}
 			<div style="display: flex; justify-content: flex-end; align-items: center;">
 				<div style="font-weight: 300;">Create transfer</div>
 				<HorizontalSpacing width={1} />

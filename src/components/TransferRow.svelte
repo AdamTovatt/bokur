@@ -4,6 +4,7 @@
 	import VerticalSpacing from './VerticalSpacing.svelte';
 	import TrashIcon from '../icons/TrashIcon.svelte';
 	import CogIcon from '../icons/CogIcon.svelte';
+	import { routeToPage } from '../functions/routing';
 
 	export let transaction: Transaction;
 	export let siblingTransaction: Transaction | undefined;
@@ -24,12 +25,19 @@
 			<strong>{transaction.value} kr</strong>
 		</div>
 		<div style="display: flex; flex-direction: row; flex: 1; justify-content: flex-end;">
-			<div style="background-color: {Color.Depth4}; padding-top: 0.5rem; padding-bottom: 0.5rem;">
+			<button
+				style="background-color: {Color.Depth4}; padding-top: 0.5rem; padding-bottom: 0.5rem;"
+			>
 				<TrashIcon />
-			</div>
-			<div style="background-color: {Color.Depth5}; padding-top: 0.5rem; padding-bottom: 0.5rem; ">
+			</button>
+			<button
+				style="background-color: {Color.Depth5}; padding-top: 0.5rem; padding-bottom: 0.5rem;"
+				on:click={() => {
+					routeToPage('transaction?id=' + transaction.id);
+				}}
+			>
 				<CogIcon />
-			</div>
+			</button>
 		</div>
 	</div>
 </div>

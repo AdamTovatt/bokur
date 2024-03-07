@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Transaction from '../../components/Transaction.svelte';
 	import VerticalSpacing from '../../components/VerticalSpacing.svelte';
 	import { Color } from '../../constants';
 	import {
@@ -13,15 +12,12 @@
 	import { page } from '$app/stores';
 	import { pageTitle, token } from '$lib/store';
 	import { onMount } from 'svelte';
-	import BokurButton from '../../components/BokurButton.svelte';
-	import { routeToPage } from '../../functions/routing';
 	import TransactionPageHeader from '../../components/TransactionPageHeader.svelte';
 	import HorizontalSpacing from '../../components/HorizontalSpacing.svelte';
 	import TransactionDetail from '../../components/TransactionDetail.svelte';
 	import type { Account } from '$lib/types';
 	import AccountPicker from '../../components/AccountPicker.svelte';
 	import FilePicker from '../../components/FilePicker.svelte';
-	import { assets } from '$app/paths';
 	import TransferManagerBox from '../../components/TransferManagerBox.svelte';
 
 	onMount(() => {
