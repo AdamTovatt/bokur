@@ -35,7 +35,7 @@
 			></TwoColumnsRow>
 		{/each}
 		<VerticalSpacing height={1} />
-		<TwoColumnsRow leftColumn={'Total'} rightColumn={totalValue}></TwoColumnsRow>
+		<TwoColumnsRow leftColumn={'Total'} rightColumn={totalValue.toString()}></TwoColumnsRow>
 		<VerticalSpacing height={0.5} />
 	{:else}
 		<TextContainer>(loading)</TextContainer>
