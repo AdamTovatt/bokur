@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { getAccountSummaries } from '$lib/api';
+	import { formatMoney } from '$lib/functions';
 	import { token } from '$lib/store';
 	import type { AccountValueInformation } from '$lib/types';
 	import { Color } from '../constants';
@@ -31,11 +32,13 @@
 	<VerticalSpacing height={1.5} />
 	{#if accountsInformation}
 		{#each accountsInformation as summary}
-			<TwoColumnsRow leftColumn={summary.account.name} rightColumn={summary.balance.toString()}
+			<TwoColumnsRow
+				leftColumn={summary.account.name}
+				rightColumn={formatMoney(summary.balance, 'kr')}
 			></TwoColumnsRow>
 		{/each}
 		<VerticalSpacing height={1} />
-		<TwoColumnsRow leftColumn={'Total'} rightColumn={totalValue.toString()}></TwoColumnsRow>
+		<TwoColumnsRow leftColumn={'Total'} rightColumn={formatMoney(totalValue, 'kr')}></TwoColumnsRow>
 		<VerticalSpacing height={0.5} />
 	{:else}
 		<TextContainer>(loading)</TextContainer>

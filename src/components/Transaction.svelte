@@ -1,5 +1,6 @@
 <script lang="ts">
-	import type { Account, Transaction } from '$lib/types';
+	import { formatMoney } from '$lib/functions';
+	import type { Transaction } from '$lib/types';
 	import { Color } from '../constants';
 	import { routeToPage } from '../functions/routing';
 	import Plupp from './Plupp.svelte';
@@ -22,7 +23,7 @@
 				<p style="max-width: 60%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
 					{transaction.name}
 				</p>
-				<p>{transaction.value} kr</p>
+				<p>{formatMoney(transaction.value, 'kr')}</p>
 			</div>
 			<div style="display: flex; justify-content: space-between;">
 				<p>

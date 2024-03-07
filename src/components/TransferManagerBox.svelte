@@ -8,6 +8,7 @@
 	import AccountPicker from './AccountPicker.svelte';
 	import { createTransfer, getTransaction } from '$lib/api';
 	import TransferRow from './TransferRow.svelte';
+	import { formatMoney } from '$lib/functions';
 
 	export let transaction: Transaction;
 	export let accounts: Account[];
@@ -90,7 +91,7 @@
 				/>
 			{:else}
 				<div style="font-weight: 300;">
-					Transfer amount: {transferAmount ? transferAmount + ' kr' : ''}
+					Transfer amount: {transferAmount ? formatMoney(transferAmount, 'kr') : ''}
 				</div>
 				<VerticalSpacing height={0.2} />
 				<input

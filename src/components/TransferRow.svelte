@@ -5,6 +5,7 @@
 	import TrashIcon from '../icons/TrashIcon.svelte';
 	import CogIcon from '../icons/CogIcon.svelte';
 	import { routeToPage } from '../functions/routing';
+	import { formatMoney } from '$lib/functions';
 
 	export let transaction: Transaction;
 	export let siblingTransaction: Transaction | undefined;
@@ -22,7 +23,7 @@
 			To <strong>{transaction.affectedAccount.name}</strong> (from {siblingTransaction
 				? siblingTransaction.affectedAccount.name
 				: 'missing account'}):
-			<strong>{transaction.value} kr</strong>
+			<strong>{formatMoney(transaction.value, 'kr')}</strong>
 		</div>
 		<div style="display: flex; flex-direction: row; flex: 1; justify-content: flex-end;">
 			<button

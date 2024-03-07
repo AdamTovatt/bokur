@@ -19,6 +19,7 @@
 	import HorizontalSpacing from '../../components/HorizontalSpacing.svelte';
 	import type { Account } from '$lib/types';
 	import AccountPicker from '../../components/AccountPicker.svelte';
+	import { formatMoney } from '$lib/functions';
 
 	onMount(() => {
 		pageTitle.set('Transfer');
@@ -101,7 +102,7 @@
 				/>
 			{:else}
 				<div style="font-weight: 300;">
-					Transfer amount: {transferAmount ? transferAmount + ' kr' : ''}
+					Transfer amount: {transferAmount ? formatMoney(transferAmount, 'kr') : ''}
 				</div>
 				<VerticalSpacing height={0.2} />
 				<input

@@ -6,6 +6,7 @@
 	import VerticalSpacing from './VerticalSpacing.svelte';
 	import BokurButton from './BokurButton.svelte';
 	import { updateTransaction } from '$lib/api';
+	import { formatMoney } from '$lib/functions';
 
 	export let transaction: Transaction;
 	export let onIgnoredUpdated: (transaction: Transaction) => void;
@@ -62,7 +63,7 @@
 					(missing account)
 				{/if}
 			</p>
-			<p>{transaction.value} kr</p>
+			<p>{formatMoney(transaction.value, 'kr')}</p>
 		</div>
 		<VerticalSpacing height={0.5} />
 		<div class="flex flex-row justify-between mb-1">
