@@ -20,7 +20,7 @@ export interface Transaction {
 	ignored: boolean;
 	parentId: number;
 	hasChildren: boolean;
-	children: string[];
+	children: Transaction[];
 	siblingId: number;
 	requiresAction: boolean;
 }

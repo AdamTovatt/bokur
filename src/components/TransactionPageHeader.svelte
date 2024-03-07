@@ -66,7 +66,7 @@
 		</div>
 		<VerticalSpacing height={0.5} />
 		<div class="flex flex-row justify-between mb-1">
-			<p>
+			<p style="font-weight: 300;">
 				Ignored:
 				<span
 					><input
@@ -78,7 +78,7 @@
 					/></span
 				>
 			</p>
-			<p>
+			<p style="font-weight: 300;">
 				Ignore file requirement:
 				<span
 					><input

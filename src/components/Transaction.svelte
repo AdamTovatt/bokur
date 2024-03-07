@@ -10,7 +10,7 @@
 
 <button
 	class="flex flex-row p-3 rounded-2xl items-center relative"
-	style={`background-color: ${Color.Depth4}; font-size: 0.8rem; color: ${Color.White}`}
+	style={`background-color: ${transaction.ignored ? Color.Depth3 : Color.Depth4}; font-size: 0.8rem; color: ${Color.White}; box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);`}
 	on:click={() => {
 		if (!transaction.ignored || forceExpand) routeToPage('transaction?id=' + transaction.id);
 		forceExpand = true;

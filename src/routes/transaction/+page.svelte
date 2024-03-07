@@ -22,6 +22,7 @@
 	import AccountPicker from '../../components/AccountPicker.svelte';
 	import FilePicker from '../../components/FilePicker.svelte';
 	import { assets } from '$app/paths';
+	import TransferManagerBox from '../../components/TransferManagerBox.svelte';
 
 	onMount(() => {
 		pageTitle.set('Transaction');
@@ -62,6 +63,10 @@
 		await deleteTransactionFile(transaction.id);
 		transaction.associatedFileName = null;
 	}
+
+	async function createdTransfer() {
+		transaction = await getTransaction(transactionId!);
+	}
 </script>
 
 <VerticalSpacing height={1} />
@@ -97,6 +102,9 @@
 	<div
 		style="width: 100%; display: flex; flex: 1; flex-direction: column; justify-content: flex-end"
 	>
+		{#if transaction}
+			<TransferManagerBox onCreatedTransfer={createdTransfer} {transaction} {accounts} />
+		{/if}
 		<VerticalSpacing height={1} />
 		<div
 			class="flex flex-row p-3 rounded-2xl items-center relative"
@@ -134,14 +142,6 @@
 				<div style="min-height: 10rem">Loading....</div>
 			{/if}
 		</div>
-		<!-- <VerticalSpacing height={1} />
-	<BokurButton
-		additionalStyling="max-width: 5rem"
-		backgroundColor={Color.Depth4}
-		onClick={() => {
-			routeToPage('transactions');
-		}}>Back</BokurButton
-	> -->
 	</div>
 {/if}
 <VerticalSpacing height={5} />
