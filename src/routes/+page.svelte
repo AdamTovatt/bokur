@@ -3,11 +3,15 @@
 	import AccountsSummaryPanel from '../components/AccountsSummaryPanel.svelte';
 	import { pageTitle, token } from '$lib/store';
 	import auth from '$lib/authService';
-	import { getAllAccounts, getRequisitionDaysLeft } from '$lib/api';
+	import { getAllAccounts, getAllThatRequiresAction, getRequisitionDaysLeft } from '$lib/api';
 	import { onMount } from 'svelte';
 	import Requisition from '../components/Requisition.svelte';
 	import ActionRequired from '../components/ActionRequired.svelte';
 	import BokurButton from '../components/BokurButton.svelte';
+	import type { Transaction } from '$lib/types';
+	import { routeToPage } from '../functions/routing';
+
+	let transactionsThatRequireAction: Transaction[];
 
 	function logout() {
 		auth.logout();
@@ -15,6 +19,7 @@
 
 	async function initialize() {
 		getAllAccounts();
+		transactionsThatRequireAction = await getAllThatRequiresAction();
 	}
 
 	$: {
@@ -33,6 +38,16 @@
 <VerticalSpacing height={1} />
 <Requisition />
 <VerticalSpacing height={1} />
+{#if transactionsThatRequireAction && transactionsThatRequireAction.length > 0}
+	<ActionRequired transactions={transactionsThatRequireAction} />
+{:else}
+	<BokurButton
+		onClick={() => {
+			routeToPage('transactions');
+		}}
+		>Go to transactions
+	</BokurButton>
+{/if}
 <ActionRequired />
 <VerticalSpacing height={1} />
 <div class="h-4" />

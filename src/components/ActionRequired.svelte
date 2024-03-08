@@ -5,17 +5,7 @@
 	import { routeToPage } from '../functions/routing';
 	import BokurButton from './BokurButton.svelte';
 
-	let transactions: import('$lib/types').Transaction[] = [];
-
-	async function initialize() {
-		transactions = await getAllThatRequiresAction();
-	}
-
-	$: {
-		if ($token) {
-			initialize();
-		}
-	}
+	export let transactions: import('$lib/types').Transaction[] = [];
 </script>
 
 {#if transactions.length > 0}
