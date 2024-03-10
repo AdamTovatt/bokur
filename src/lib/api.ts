@@ -1,7 +1,8 @@
 import { token } from '$lib/store';
-import type { Account, AccountValueInformation, Transaction } from './types';
+import type { Account, AccountValueInformation, ApiResponse, Transaction } from './types';
 
-const apiUrl = 'https://sakurapi.se/bokur/';
+//const apiUrl = 'https://sakurapi.se/bokur/';
+const apiUrl = 'https://localhost:5001/';
 let localToken = '';
 let cachedAccounts: Account[] | null = null;
 
@@ -358,6 +359,29 @@ export async function setTransactionAmount(transactionId: number, amount: number
 	} catch (error) {
 		// Handle errors, log them, or rethrow if necessary
 		console.error('Error setting transaction amount:', error);
+		throw error;
+	}
+}
+
+export async function createRequisition(redirectUrl?: string): Promise<ApiResponse> {
+	try {
+		const response = await fetch(apiUrl + 'transaction/create-requsition', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: 'Bearer ' + localToken
+			},
+			body: JSON.stringify({ redirectUrl })
+		});
+
+		const data = await response.json();
+
+		return {
+			message: data.message,
+			success: response.ok
+		};
+	} catch (error) {
+		console.error('Error creating requisition:', error);
 		throw error;
 	}
 }
