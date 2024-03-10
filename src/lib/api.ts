@@ -1,8 +1,8 @@
 import { token } from '$lib/store';
 import type { Account, AccountValueInformation, ApiResponse, Transaction } from './types';
 
-//const apiUrl = 'https://sakurapi.se/bokur/';
-const apiUrl = 'https://localhost:5001/';
+const apiUrl = 'https://sakurapi.se/bokur/';
+//const apiUrl = 'https://localhost:5001/';
 let localToken = '';
 let cachedAccounts: Account[] | null = null;
 
