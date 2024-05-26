@@ -10,6 +10,7 @@
 	import BokurButton from '../components/BokurButton.svelte';
 	import type { Transaction } from '$lib/types';
 	import { routeToPage } from '../functions/routing';
+	import MaxWidthContainer from '../components/MaxWidthContainer.svelte';
 
 	let transactionsThatRequireAction: Transaction[];
 
@@ -33,23 +34,25 @@
 	});
 </script>
 
-<VerticalSpacing height={1} />
-<AccountsSummaryPanel />
-<VerticalSpacing height={1} />
-<Requisition />
-<VerticalSpacing height={1} />
-{#if transactionsThatRequireAction && transactionsThatRequireAction.length > 0}
-	<ActionRequired transactions={transactionsThatRequireAction} />
-{:else}
-	<BokurButton
-		onClick={() => {
-			routeToPage('transactions');
-		}}
-		>Go to transactions
-	</BokurButton>
-{/if}
-<ActionRequired />
-<VerticalSpacing height={1} />
-<div class="h-4" />
-<BokurButton onClick={logout}>Logout</BokurButton>
-<VerticalSpacing height={5} />
+<MaxWidthContainer maxWidth={30}>
+	<VerticalSpacing height={1} />
+	<AccountsSummaryPanel />
+	<VerticalSpacing height={1} />
+	<Requisition />
+	<VerticalSpacing height={1} />
+	{#if transactionsThatRequireAction && transactionsThatRequireAction.length > 0}
+		<ActionRequired transactions={transactionsThatRequireAction} />
+	{:else}
+		<BokurButton
+			onClick={() => {
+				routeToPage('transactions');
+			}}
+			>Go to transactions
+		</BokurButton>
+	{/if}
+	<ActionRequired />
+	<VerticalSpacing height={1} />
+	<div class="h-4" />
+	<BokurButton onClick={logout}>Logout</BokurButton>
+	<VerticalSpacing height={5} />
+</MaxWidthContainer>
