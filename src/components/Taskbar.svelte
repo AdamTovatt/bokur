@@ -1,9 +1,11 @@
 <script lang="ts">
-	import { Color } from '../constants';
+	import { Color, BorderRadius } from '../constants';
 	import Icon from '$lib/images/book.svelte';
 	import HamburgerIcon from '../icons/HamburgerIcon.svelte';
 	import { pageTitle } from '$lib/store';
 	import { routeToPage } from '../functions/routing';
+	import BokurButton from './BokurButton.svelte';
+	import VerticalSpacing from './VerticalSpacing.svelte';
 
 	let menuOpen: boolean = false;
 </script>
@@ -11,9 +13,8 @@
 {#if menuOpen}
 	<button
 		style="
-		min-height: 100%;
+		min-height: 100vh;
 		min-width: 100vw;
-		background-color: black;
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-end;
@@ -22,18 +23,33 @@
 		position: fixed;
 		right: 0;
 		bottom: 0;
-		z-index: 20"
+		z-index: 20;
+		cursor: default;"
 		on:click={() => {
 			menuOpen = false;
 		}}
 	>
-		<div>
-			<div style="display: flex; justify-content: flex-end; background-color: red;">
-				<button on:click={() => {}}
-					><div style="background-color: red; max-width: 5rem">hej</div></button
+		<div style="display: flex; justify-content: flex-end; ">
+			<div
+				style="background-color: {Color.Depth3}; width: 10rem; padding: 1rem; border-radius: {BorderRadius.Default}; 
+				box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.5);"
+			>
+				<BokurButton
+					backgroundColor={Color.Depth4}
+					onClick={() => {
+						routeToPage('transactions');
+					}}>Transactions</BokurButton
+				>
+				<VerticalSpacing height={1} />
+				<BokurButton
+					backgroundColor={Color.Depth4}
+					onClick={() => {
+						routeToPage('invoice');
+					}}>Invoice</BokurButton
 				>
 			</div>
 		</div>
+		<VerticalSpacing height={4} />
 	</button>
 {/if}
 
