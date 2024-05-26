@@ -5,7 +5,7 @@
 
 	export let onFilePicked: (file: File, fileName: string) => void;
 
-	const authorizedExtensions = ['.jpg', '.jpeg', '.png', '.webp', '.pdf', '.*'];
+	export let authorizedExtensions = ['.jpg', '.jpeg', '.png', '.webp', '.pdf', '.*'];
 
 	let file: File;
 	let fileName: string;

@@ -384,4 +384,40 @@ export async function createRequisition(redirectUrl?: string): Promise<ApiRespon
 		console.error('Error creating requisition:', error);
 		throw error;
 	}
+}	
+
+export async function generatePdf(timeCsvFile: File, configurationJson: string): Promise<void> {
+	try {
+		const formData = new FormData();
+		formData.append('timeCsv', timeCsvFile);
+		formData.append('configuration', configurationJson);
+
+		const response = await fetch(apiUrl + `invoice/generate`, {
+			method: 'POST',
+			headers: {
+				Authorization: 'Bearer ' + localToken
+			},
+			body: formData
+		});
+
+		if (!response.ok) {
+			throw new Error(`Failed to generate pdf. Status: ${response.status}`);
+		}
+
+		const blob = await response.blob();
+		const url = window.URL.createObjectURL(blob);
+		const a = document.createElement('a');
+		a.href = url;
+		a.download = 'invoice.pdf'; // You can set the file name dynamically if needed
+		document.body.appendChild(a); // Append to the document to ensure the click works
+		a.click();
+		a.remove();
+		window.URL.revokeObjectURL(url); // Clean up the URL object
+
+		// Optionally handle response data if necessary
+	} catch (error) {
+		// Handle errors, log them, or rethrow if necessary
+		console.error('Error generating pdf:', error);
+		throw error;
+	}
 }

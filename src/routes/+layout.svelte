@@ -28,11 +28,17 @@
 
 <Taskbar />
 <PageContentContainer>
-	<MaxWidthContainer maxWidth={30}>
+	<div
+		style="		display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+	min-height: 100vh;"
+	>
 		{#if $isAuthenticated}
 			<slot />
 		{:else}
 			<Login />
 		{/if}
-	</MaxWidthContainer>
+	</div>
 </PageContentContainer>
