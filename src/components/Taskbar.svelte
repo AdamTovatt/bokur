@@ -4,10 +4,19 @@
 	import HamburgerIcon from '../icons/HamburgerIcon.svelte';
 	import { pageTitle } from '$lib/store';
 	import { routeToPage } from '../functions/routing';
+	import { exportData } from '$lib/api';
 	import BokurButton from './BokurButton.svelte';
 	import VerticalSpacing from './VerticalSpacing.svelte';
 
 	let menuOpen: boolean = false;
+
+	async function handleExport() {
+		try {
+			await exportData();
+		} catch (error) {
+			console.error('Export failed:', error);
+		}
+	}
 </script>
 
 {#if menuOpen}
@@ -29,7 +38,7 @@
 			menuOpen = false;
 		}}
 	>
-		<div style="display: flex; justify-content: flex-end; ">
+		<div style="display: flex; justify-content: flex-end;">
 			<div
 				style="background-color: {Color.Depth3}; width: 10rem; padding: 1rem; border-radius: {BorderRadius.Default}; 
 				box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.5);"
@@ -47,6 +56,8 @@
 						routeToPage('invoice');
 					}}>Invoice</BokurButton
 				>
+				<VerticalSpacing height={1} />
+				<BokurButton backgroundColor={Color.Depth4} onClick={handleExport}>Export</BokurButton>
 			</div>
 		</div>
 		<VerticalSpacing height={4} />

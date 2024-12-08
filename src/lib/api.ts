@@ -421,3 +421,48 @@ export async function generatePdf(timeCsvFile: File, configurationJson: string):
 		throw error;
 	}
 }
+
+export async function exportData(startDate?: string, endDate?: string): Promise<void> {
+    try {
+        // If no startDate is provided, use the first day of the current year
+        if (!startDate) {
+            const currentYear = new Date().getFullYear();
+            startDate = `${currentYear}-01-01`;
+        }
+
+        const url = new URL(apiUrl + 'export/exported');
+        url.searchParams.append('startDate', startDate);
+
+        if (endDate) {
+            url.searchParams.append('endDate', endDate);
+        }
+
+        const response = await fetch(url.toString(), {
+            method: 'GET',
+            headers: {
+                Authorization: 'Bearer ' + localToken
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to export data. Status: ${response.status}`);
+        }
+
+        // Create a Blob from the response
+        const blob = await response.blob();
+
+        // Create a temporary link element to trigger the download
+        const downloadUrl = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = downloadUrl;
+        a.download = 'bokur_export.zip';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(downloadUrl); // Clean up the URL object
+    } catch (error) {
+        console.error('Error exporting data:', error);
+        throw error;
+    }
+}
+
