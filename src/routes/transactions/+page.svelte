@@ -16,7 +16,7 @@
 	});
 
 	async function initialize() {
-		transactions = await getAllTransactions(100, 0);
+		transactions = await getAllTransactions(500, 0);
 		transactionsWithAction = await getAllThatRequiresAction();
 	}
 
