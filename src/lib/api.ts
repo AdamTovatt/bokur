@@ -61,6 +61,24 @@ export async function getAccountSummaries(): Promise<AccountValueInformation[]> 
 	}
 }
 
+export async function cleanDuplicateTransactions(): Promise<void> {
+	try {
+		const response = await fetch(apiUrl + 'transaction/clean-duplicate-transactions', {
+			method: 'PUT',
+			headers: {
+				Authorization: 'Bearer ' + localToken
+			}
+		});
+
+		if (!response.ok) {
+			throw new Error(`Failed to clean duplicate transactions. Status: ${response.status}`);
+		}
+	} catch (error) {
+		console.error('Error cleaning duplicate transactions:', error);
+		throw error;
+	}
+}
+
 export async function getRequisitionDaysLeft(): Promise<number> {
 	try {
 		const response = await fetch(apiUrl + 'transaction/requisition/days-left', {

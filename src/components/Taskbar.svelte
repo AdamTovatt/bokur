@@ -4,11 +4,19 @@
 	import HamburgerIcon from '../icons/HamburgerIcon.svelte';
 	import { pageTitle } from '$lib/store';
 	import { routeToPage } from '../functions/routing';
-	import { exportData } from '$lib/api';
+	import { cleanDuplicateTransactions, exportData } from '$lib/api';
 	import BokurButton from './BokurButton.svelte';
 	import VerticalSpacing from './VerticalSpacing.svelte';
 
 	let menuOpen: boolean = false;
+
+	async function handleCleanDuplicateTransactions() {
+		try {
+			await cleanDuplicateTransactions();
+		} catch (error) {
+			console.error('Duplication cleaning failed:', error);
+		}
+	}
 
 	async function handleExport() {
 		try {
@@ -58,6 +66,9 @@
 				>
 				<VerticalSpacing height={1} />
 				<BokurButton backgroundColor={Color.Depth4} onClick={handleExport}>Export</BokurButton>
+				<BokurButton backgroundColor={Color.Depth4} onClick={handleExport}
+					>Clean Duplicate Transactions</BokurButton
+				>
 			</div>
 		</div>
 		<VerticalSpacing height={4} />
