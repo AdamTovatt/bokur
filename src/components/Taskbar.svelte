@@ -66,7 +66,8 @@
 				>
 				<VerticalSpacing height={1} />
 				<BokurButton backgroundColor={Color.Depth4} onClick={handleExport}>Export</BokurButton>
-				<BokurButton backgroundColor={Color.Depth4} onClick={handleExport}
+				<VerticalSpacing height={1} />
+				<BokurButton backgroundColor={Color.Depth4} onClick={handleCleanDuplicateTransactions}
 					>Clean Duplicate Transactions</BokurButton
 				>
 			</div>
