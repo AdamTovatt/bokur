@@ -41,7 +41,7 @@
 			"iban": "SE5595000099603418965103",
 			"bankgiroNumber": "5682-4618"
 		},
-		"defaultUnitPrice": 750,
+		"defaultUnitPrice": 900,
 		"unitPriceOverride": {}
 	}
 }
