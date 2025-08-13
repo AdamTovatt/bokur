@@ -1,0 +1,47 @@
+{
+	"name": "Bliq AB Template",
+	"invoiceInformation": {
+		"number": "",
+		"comment": "Please pay within the specified timeframe. Thank you for your business!",
+		"daysToPay": 30,
+		"includeTax": true,
+		"swedish": true,
+		"includeBreakdown": true,
+		"receiver": {
+			"name": "Bliq AB",
+			"address": {
+				"firstLine": "Drottninggatan 68",
+				"secondLine": "111 20 Stockholm"
+			},
+			"organizationNumber": "556678-2677",
+			"reference": {
+				"name": "Richard Blom",
+				"email": "richard.blom@bliq.tech",
+				"phoneNumber": ""
+			}
+		}
+	},
+	"generalInformation": {
+		"logoUrl": "https://avatars.githubusercontent.com/u/71601343",
+		"sender": {
+			"name": "Sakur AB",
+			"address": {
+				"firstLine": "Södra Esplanaden 36",
+				"secondLine": "223 52 Lund"
+			},
+			"organizationNumber": "559318-1471",
+			"reference": {
+				"name": "Adam Tovatt",
+				"email": "adam@sakur.se",
+				"phoneNumber": "+46 73-634 24 92"
+			}
+		},
+		"paymentInformation": {
+			"bic": "NDEASESS",
+			"iban": "SE5595000099603418965103",
+			"bankgiroNumber": "5682-4618"
+		},
+		"defaultUnitPrice": 750,
+		"unitPriceOverride": {}
+	}
+}

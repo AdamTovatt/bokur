@@ -10,7 +10,7 @@
 	class="panel"
 	style="background-color: {backgroundColor}; border-radius: {BorderRadius.Default}; align-items: {center
 		? 'center'
-		: 'flex-start'}; flex-direction: {flexDirection};"
+		: ''}; flex-direction: {flexDirection};"
 >
 	<slot />
 </div>

@@ -1,0 +1,47 @@
+{
+	"name": "Careless Technologies",
+	"invoiceInformation": {
+		"number": "",
+		"comment": "This invoice is for the current month. Please include the invoice number as message on the payment.",
+		"daysToPay": 30,
+		"includeTax": false,
+		"swedish": false,
+		"includeBreakdown": true,
+		"receiver": {
+			"name": "Careless Technologies Limited",
+			"address": {
+				"firstLine": "71-75 Shelton Street, Covent Garden",
+				"secondLine": "WC2H 9JQ, London, United Kingdom"
+			},
+			"organizationNumber": "",
+			"reference": {
+				"name": "André de Neergaaard",
+				"email": "andre@wearecareless.com",
+				"phoneNumber": ""
+			}
+		}
+	},
+	"generalInformation": {
+		"logoUrl": "https://avatars.githubusercontent.com/u/71601343",
+		"sender": {
+			"name": "Sakur AB",
+			"address": {
+				"firstLine": "Stora Tvärgatan 13, 1001",
+				"secondLine": "223 53 Lund"
+			},
+			"organizationNumber": "559318-1471",
+			"reference": {
+				"name": "Adam Tovatt",
+				"email": "adam@sakur.se",
+				"phoneNumber": "+46 73-634 24 92"
+			}
+		},
+		"paymentInformation": {
+			"bic": "NDEASESS",
+			"iban": "SE5595000099603418965103",
+			"bankgiroNumber": "5682-4618"
+		},
+		"defaultUnitPrice": 750,
+		"unitPriceOverride": {}
+	}
+}
