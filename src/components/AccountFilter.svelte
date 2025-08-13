@@ -8,6 +8,8 @@
 	export let selectedAccounts: string[] = [];
 	export let accountCounts: Record<string, number> = {};
 
+	let hasInitialized = false;
+
 	$: accountOptions = [
 		...availableAccounts.map(account => ({ 
 			id: account, 
@@ -19,9 +21,11 @@
 		}
 	];
 
-	$: if (selectedAccounts.length === 0 && accountOptions.length > 0) {
+	// Only auto-select all on initial load, not when user manually clears selection
+	$: if (!hasInitialized && selectedAccounts.length === 0 && accountOptions.length > 0) {
 		selectedAccounts = accountOptions.map(option => option.id);
 		dispatch('filterChange', selectedAccounts);
+		hasInitialized = true;
 	}
 
 	function toggleAccount(accountId: string) {
