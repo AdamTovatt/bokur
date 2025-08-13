@@ -1,6 +1,6 @@
 import { createAuth0Client } from '@auth0/auth0-spa-js';
 import type { Auth0Client } from '@auth0/auth0-spa-js';
-import { user, isAuthenticated, popupOpen, token } from '$lib/store';
+import { user, isAuthenticated, token } from '$lib/store';
 
 let client: Auth0Client | null = null;
 
@@ -19,13 +19,23 @@ async function login(): Promise<void> {
 	if (!client) {
 		client = await createClient();
 	}
-	popupOpen.set(true);
 	try {
-		await client.loginWithPopup({
+		await client.loginWithRedirect({
 			authorizationParams: {
 				redirect_uri: window.location.origin
 			}
 		});
+	} catch (e) {
+		console.error(e);
+	}
+}
+
+async function handleRedirectCallback(): Promise<void> {
+	if (!client) {
+		client = await createClient();
+	}
+	try {
+		await client.handleRedirectCallback();
 		const userDetails = await client.getUser();
 		if (userDetails) {
 			user.set(userDetails);
@@ -40,8 +50,6 @@ async function login(): Promise<void> {
 		}
 	} catch (e) {
 		console.error(e);
-	} finally {
-		popupOpen.set(false);
 	}
 }
 
@@ -55,7 +63,8 @@ async function logout(): Promise<void> {
 const auth = {
 	createClient,
 	login,
-	logout
+	logout,
+	handleRedirectCallback
 };
 
 export default auth;
