@@ -8,7 +8,7 @@
 	<p class="text-center" style="color: ${Color.White}">{title}</p>
 	<div
 		class=" flex gap-2 flex-col overflow-y-scroll"
-		style={`max-height: ${expanded ? 'calc(100vh - 9rem)' : 'calc(50vh - 6.5rem)'};`}
+		style={`max-height: ${expanded ? 'calc(100vh - 25rem)' : 'calc(50vh - 6.5rem)'};`}
 	>
 		<slot />
 	</div>

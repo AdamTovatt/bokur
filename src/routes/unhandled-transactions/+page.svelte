@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getAllTransactions } from '$lib/api';
+	import { getAllThatRequiresAction } from '$lib/api';
 	import { pageTitle, token } from '$lib/store';
 	import { onMount } from 'svelte';
 	import Transaction from '../../components/Transaction.svelte';
@@ -9,7 +9,7 @@
 	import AccountFilter from '../../components/AccountFilter.svelte';
 	import SearchInput from '../../components/SearchInput.svelte';
 
-	let transactions: import('$lib/types').Transaction[] = [];
+	let transactionsWithAction: import('$lib/types').Transaction[] = [];
 	let filteredTransactions: import('$lib/types').Transaction[] = [];
 	let selectedAccounts: string[] = [];
 	let availableAccounts: string[] = [];
@@ -17,7 +17,7 @@
 	let searchQuery: string = '';
 
 	onMount(() => {
-		pageTitle.set('Transactions');
+		pageTitle.set('Unhandled Transactions');
 	});
 
 	function extractUniqueAccounts(transactions: import('$lib/types').Transaction[]): string[] {
@@ -48,9 +48,9 @@
 	}
 
 	async function initialize() {
-		transactions = await getAllTransactions(500, 0);
-		availableAccounts = extractUniqueAccounts(transactions);
-		accountCounts = calculateAccountCounts(transactions);
+		transactionsWithAction = await getAllThatRequiresAction();
+		availableAccounts = extractUniqueAccounts(transactionsWithAction);
+		accountCounts = calculateAccountCounts(transactionsWithAction);
 	}
 
 	function filterTransactions(
@@ -87,13 +87,18 @@
 		searchQuery = event.detail;
 	}
 
+	async function handleFileUploaded(event: CustomEvent) {
+		// Refresh the unhandled transactions list after file upload
+		await initialize();
+	}
+
 	$: {
 		if ($token) {
 			initialize();
 		}
 	}
 
-	$: filteredTransactions = filterTransactions(transactions, selectedAccounts, searchQuery);
+	$: filteredTransactions = filterTransactions(transactionsWithAction, selectedAccounts, searchQuery);
 </script>
 
 <MaxWidthContainer maxWidth={30}>
@@ -101,7 +106,7 @@
 	<SearchInput 
 		bind:searchQuery={searchQuery}
 		on:search={handleSearch}
-		placeholder="Search transactions by name..."
+		placeholder="Search unhandled transactions by name..."
 	/>
 	<AccountFilter 
 		{availableAccounts}
@@ -110,9 +115,13 @@
 		on:filterChange={handleFilterChange}
 	/>
 	<div class="flex flex-col gap-4" style="max-height: 100vh;">
-		<TransactionsContainer title="All transactions ({filteredTransactions.length})" expanded={true}>
+		<TransactionsContainer title="Transactions with missing data ({filteredTransactions.length})" expanded={true}>
 			{#each filteredTransactions as transaction (transaction.id)}
-				<Transaction {transaction} />
+				<Transaction 
+					{transaction} 
+					showUpload={true}
+					on:fileUploaded={handleFileUploaded}
+				/>
 			{/each}
 		</TransactionsContainer>
 	</div>

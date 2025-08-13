@@ -21,8 +21,8 @@
 			hasBorder
 			backgroundColor={Color.Depth4}
 			onClick={() => {
-				routeToPage('transactions');
-			}}>Go to transactions</BokurButton
+				routeToPage('unhandled-transactions');
+			}}>Go to unhandled transactions</BokurButton
 		>
 	</div>
 {/if}

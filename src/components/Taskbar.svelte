@@ -55,7 +55,14 @@
 					backgroundColor={Color.Depth4}
 					onClick={() => {
 						routeToPage('transactions');
-					}}>Transactions</BokurButton
+					}}>All Transactions</BokurButton
+				>
+				<VerticalSpacing height={1} />
+				<BokurButton
+					backgroundColor={Color.Depth4}
+					onClick={() => {
+						routeToPage('unhandled-transactions');
+					}}>Unhandled Transactions</BokurButton
 				>
 				<VerticalSpacing height={1} />
 				<BokurButton
