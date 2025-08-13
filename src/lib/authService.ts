@@ -10,7 +10,9 @@ async function createClient(): Promise<Auth0Client> {
 		clientId: import.meta.env.VITE_APP_CLIENT_ID as string,
 		authorizationParams: {
 			audience: import.meta.env.VITE_AUTH0_AUDIENCE as string
-		}
+		},
+		useRefreshTokens: true,
+		cacheLocation: 'localstorage'
 	});
 	return auth0Client;
 }
