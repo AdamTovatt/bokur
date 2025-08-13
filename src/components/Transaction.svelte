@@ -35,7 +35,7 @@
 		<a
 			{href}
 			class="flex flex-col no-underline flex-1"
-			style={`color: ${Color.White}; text-decoration: none; cursor: ${isClickable ? 'pointer' : 'default'};`}
+			style={`color: ${Color.White}; text-decoration: none; cursor: ${isClickable ? 'pointer' : 'default'}; max-width: calc(100% - 4rem);`}
 			on:click={handleClick}
 		>
 			<div style="display: flex; justify-content: space-between;">
@@ -45,7 +45,7 @@
 				<p>{formatMoney(transaction.value, 'kr')}</p>
 			</div>
 			<div style="display: flex; justify-content: space-between;">
-				<p>
+				<p style="max-width: 60%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
 					{#if transaction.affectedAccount}
 						{transaction.affectedAccount.name}
 					{:else}
@@ -55,7 +55,7 @@
 				<p>{new Date(transaction.date).toLocaleDateString('sv-SE')}</p>
 			</div>
 		</a>
-		<div class="flex items-center gap-2 ml-2">
+		<div class="flex items-center gap-2 ml-auto">
 			{#if needsFile}
 				<QuickFileUpload 
 					{transaction} 
