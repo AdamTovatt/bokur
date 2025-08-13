@@ -1,8 +1,4 @@
-<script lang="ts">
-	export let margin: number = 1;
-</script>
-
-<div style="margin-left: {margin}rem; margin-right: {margin}rem;"><slot /></div>
+<div style="padding-left: 1rem; padding-right: 1rem;"><slot /></div>
 
 <style>
 	div {

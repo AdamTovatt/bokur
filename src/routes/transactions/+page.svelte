@@ -5,7 +5,7 @@
 	import Transaction from '../../components/Transaction.svelte';
 	import TransactionsContainer from '../../components/TransactionsContainer.svelte';
 	import VerticalSpacing from '../../components/VerticalSpacing.svelte';
-	import MaxWidthContainer from '../../components/MaxWidthContainer.svelte';
+
 	import AccountFilter from '../../components/AccountFilter.svelte';
 	import SearchInput from '../../components/SearchInput.svelte';
 
@@ -96,24 +96,22 @@
 	$: filteredTransactions = filterTransactions(transactions, selectedAccounts, searchQuery);
 </script>
 
-<MaxWidthContainer maxWidth={30}>
-	<VerticalSpacing height={1} />
-	<SearchInput 
-		bind:searchQuery={searchQuery}
-		on:search={handleSearch}
-		placeholder="Search transactions by name..."
-	/>
-	<AccountFilter 
-		{availableAccounts}
-		{accountCounts}
-		bind:selectedAccounts={selectedAccounts}
-		on:filterChange={handleFilterChange}
-	/>
-	<div class="flex flex-col gap-4" style="max-height: 100vh;">
-		<TransactionsContainer title="All transactions ({filteredTransactions.length})" expanded={true}>
-			{#each filteredTransactions as transaction (transaction.id)}
-				<Transaction {transaction} />
-			{/each}
-		</TransactionsContainer>
-	</div>
-</MaxWidthContainer>
+<VerticalSpacing height={1} />
+<SearchInput 
+	bind:searchQuery={searchQuery}
+	on:search={handleSearch}
+	placeholder="Search transactions by name..."
+/>
+<AccountFilter 
+	{availableAccounts}
+	{accountCounts}
+	bind:selectedAccounts={selectedAccounts}
+	on:filterChange={handleFilterChange}
+/>
+<div class="flex flex-col gap-4" style="max-height: 100vh;">
+	<TransactionsContainer title="All transactions ({filteredTransactions.length})" expanded={true}>
+		{#each filteredTransactions as transaction (transaction.id)}
+			<Transaction {transaction} />
+		{/each}
+	</TransactionsContainer>
+</div>
