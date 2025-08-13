@@ -115,7 +115,7 @@
 
 			<!-- Close Button -->
 			<div 
-				class="mt-6 pt-4 border-t border-gray-600 border-opacity-30"
+				class="mt-3 pt-4 border-t border-gray-600 border-opacity-30"
 				transition:scale={{ duration: 200, delay: 300, easing: cubicOut }}
 			>
 				<button
