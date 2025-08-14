@@ -200,8 +200,17 @@ export async function updateTransaction(transaction: Transaction): Promise<void>
 
 export async function uploadFile(file: File, transactionId: number): Promise<void> {
 	try {
+		// Generate a short UUID and append to filename
+		const shortUuid = crypto.randomUUID().substring(0, 8);
+		const fileExtension = file.name.split('.').pop() || '';
+		const baseName = file.name.substring(0, file.name.lastIndexOf('.')) || file.name;
+		const uniqueFileName = `${baseName}_${shortUuid}.${fileExtension}`;
+
+		// Create a new File object with the unique name
+		const uniqueFile = new File([file], uniqueFileName, { type: file.type });
+
 		const formData = new FormData();
-		formData.append('file', file);
+		formData.append('file', uniqueFile);
 
 		const response = await fetch(apiUrl + `transaction/${transactionId}/file/upload`, {
 			method: 'PUT',
@@ -402,7 +411,7 @@ export async function createRequisition(redirectUrl?: string): Promise<ApiRespon
 		console.error('Error creating requisition:', error);
 		throw error;
 	}
-}	
+}
 
 export async function generatePdf(timeCsvFile: File, configurationJson: string): Promise<void> {
 	try {
@@ -441,46 +450,45 @@ export async function generatePdf(timeCsvFile: File, configurationJson: string):
 }
 
 export async function exportData(startDate?: string, endDate?: string): Promise<void> {
-    try {
-        // If no startDate is provided, use the first day of the current year
-        if (!startDate) {
-            const currentYear = new Date().getFullYear();
-            startDate = `${currentYear}-01-01`;
-        }
+	try {
+		// If no startDate is provided, use the first day of the current year
+		if (!startDate) {
+			const currentYear = new Date().getFullYear();
+			startDate = `${currentYear}-01-01`;
+		}
 
-        const url = new URL(apiUrl + 'export/exported');
-        url.searchParams.append('startDate', startDate);
+		const url = new URL(apiUrl + 'export/exported');
+		url.searchParams.append('startDate', startDate);
 
-        if (endDate) {
-            url.searchParams.append('endDate', endDate);
-        }
+		if (endDate) {
+			url.searchParams.append('endDate', endDate);
+		}
 
-        const response = await fetch(url.toString(), {
-            method: 'GET',
-            headers: {
-                Authorization: 'Bearer ' + localToken
-            }
-        });
+		const response = await fetch(url.toString(), {
+			method: 'GET',
+			headers: {
+				Authorization: 'Bearer ' + localToken
+			}
+		});
 
-        if (!response.ok) {
-            throw new Error(`Failed to export data. Status: ${response.status}`);
-        }
+		if (!response.ok) {
+			throw new Error(`Failed to export data. Status: ${response.status}`);
+		}
 
-        // Create a Blob from the response
-        const blob = await response.blob();
+		// Create a Blob from the response
+		const blob = await response.blob();
 
-        // Create a temporary link element to trigger the download
-        const downloadUrl = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = downloadUrl;
-        a.download = 'bokur_export.zip';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        window.URL.revokeObjectURL(downloadUrl); // Clean up the URL object
-    } catch (error) {
-        console.error('Error exporting data:', error);
-        throw error;
-    }
+		// Create a temporary link element to trigger the download
+		const downloadUrl = window.URL.createObjectURL(blob);
+		const a = document.createElement('a');
+		a.href = downloadUrl;
+		a.download = 'bokur_export.zip';
+		document.body.appendChild(a);
+		a.click();
+		document.body.removeChild(a);
+		window.URL.revokeObjectURL(downloadUrl); // Clean up the URL object
+	} catch (error) {
+		console.error('Error exporting data:', error);
+		throw error;
+	}
 }
-
