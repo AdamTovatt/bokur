@@ -1,0 +1,47 @@
+{
+	"name": "FDM",
+	"invoiceInformation": {
+		"number": "",
+		"comment": "This invoice is for the current month. Please include the invoice number as message on the payment.",
+		"daysToPay": 10,
+		"includeTax": false,
+		"swedish": false,
+		"includeBreakdown": true,
+		"receiver": {
+			"name": "Foresight Data Machines",
+			"address": {
+				"firstLine": "Fora Borough Yards, 13 Dirty Lane",
+				"secondLine": "SE1 9PA, London, United Kingdom"
+			},
+			"organizationNumber": "",
+			"reference": {
+				"name": "Rachael Curzons",
+				"email": "rachael@foresightdatamachines.com",
+				"phoneNumber": ""
+			}
+		}
+	},
+	"generalInformation": {
+		"logoUrl": "https://avatars.githubusercontent.com/u/71601343",
+		"sender": {
+			"name": "Sakur AB",
+			"address": {
+				"firstLine": "Stora Tvärgatan 13, 1001",
+				"secondLine": "223 53 Lund"
+			},
+			"organizationNumber": "559318-1471",
+			"reference": {
+				"name": "Oliver Levay",
+				"email": "oliver@foresightdatamachines.com",
+				"phoneNumber": "+46 72 943 84 90"
+			}
+		},
+		"paymentInformation": {
+			"bic": "NDEASESS",
+			"iban": "SE5595000099603418965103",
+			"bankgiroNumber": "5682-4618"
+		},
+		"defaultUnitPrice": 700,
+		"unitPriceOverride": {}
+	}
+}
