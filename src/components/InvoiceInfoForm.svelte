@@ -13,6 +13,10 @@
 			<label for="days-to-pay">Days to Pay</label>
 			<input id="days-to-pay" type="number" bind:value={formData.invoiceInformation.daysToPay} />
 		</div>
+		<div class="form-group">
+			<label for="issue-date">Issue Date</label>
+			<input id="issue-date" type="date" bind:value={formData.invoiceInformation.issueDate} />
+		</div>
 	</div>
 	
 	<div class="checkbox-section">

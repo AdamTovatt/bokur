@@ -9,7 +9,12 @@
 	const dispatch = createEventDispatcher();
 
 	async function handleGeneratePdf() {
-		const jsonData = JSON.stringify(formData);
+		// Create a copy of formData and remove issueDate if not set
+		const dataToSend = JSON.parse(JSON.stringify(formData));
+		if (!dataToSend.invoiceInformation.issueDate) {
+			delete dataToSend.invoiceInformation.issueDate;
+		}
+		const jsonData = JSON.stringify(dataToSend);
 		
 		// Basic validation
 		if (!uploadedFile) {

@@ -33,6 +33,7 @@
 			number: '',
 			comment: '',
 			daysToPay: 30,
+			issueDate: undefined as string | undefined,
 			includeTax: false,
 			swedish: false,
 			includeBreakdown: true,

@@ -15,11 +15,11 @@
 		</div>
 		<div class="form-group">
 			<label for="sender-address1">Address Line 1</label>
-			<input id="sender-address1" type="text" bind:value={formData.generalInformation.sender.address.firstLine} placeholder="Stora Tvärgatan 13, 1001" />
+			<input id="sender-address1" type="text" bind:value={formData.generalInformation.sender.address.firstLine} placeholder="Lissbyvägen 50" />
 		</div>
 		<div class="form-group">
 			<label for="sender-address2">Address Line 2</label>
-			<input id="sender-address2" type="text" bind:value={formData.generalInformation.sender.address.secondLine} placeholder="223 53 Lund" />
+			<input id="sender-address2" type="text" bind:value={formData.generalInformation.sender.address.secondLine} placeholder="761 71 Norrtälje" />
 		</div>
 		<div class="form-group">
 			<label for="sender-org">Organization Number</label>
