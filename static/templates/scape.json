@@ -1,0 +1,47 @@
+{
+	"name": "Scape",
+	"invoiceInformation": {
+		"number": "",
+		"comment": "This invoice is for the current month. Please include the invoice number as message on the payment.",
+		"daysToPay": 15,
+		"includeTax": true,
+		"swedish": true,
+		"includeBreakdown": true,
+		"receiver": {
+			"name": "Reworks AI Labs AB",
+			"address": {
+				"firstLine": "Brännkyrkagatan 83",
+				"secondLine": "118 23 Stockholm"
+			},
+			"organizationNumber": "559452-6591",
+			"reference": {
+				"name": "Melvin Hagberg",
+				"email": "melvin@scape.app",
+				"phoneNumber": "+46 72 309 52 35"
+			}
+		}
+	},
+	"generalInformation": {
+		"logoUrl": "https://avatars.githubusercontent.com/u/71601343",
+		"sender": {
+			"name": "Sakur AB",
+			"address": {
+				"firstLine": "Optimusvägen 5",
+				"secondLine": "194 34 Upplands Väsby"
+			},
+			"organizationNumber": "559318-1471",
+			"reference": {
+				"name": "Adam Tovatt",
+				"email": "adam@sakur.se",
+				"phoneNumber": "+46 73-634 24 92"
+			}
+		},
+		"paymentInformation": {
+			"bic": "NDEASESS",
+			"iban": "SE5595000099603418965103",
+			"bankgiroNumber": "5682-4618"
+		},
+		"defaultUnitPrice": 512.5,
+		"unitPriceOverride": {}
+	}
+}
